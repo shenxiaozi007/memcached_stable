@@ -1,5 +1,3 @@
-<?php
+<?ph
 
-
-echo fuck;
-
+echo fuck
