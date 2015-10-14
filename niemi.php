@@ -1,3 +1,5 @@
-<?ph
+<?php 
+aaa
+:w
 
 echo fuck
