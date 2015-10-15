@@ -1,21 +1,21 @@
 <?php
 $config = array();
 
-$config[a] = array(
+$config['0'] = array(
 	'host' => "192.168.2.224",
-	'port' => "11211",
+	'port' => "11212",
 );
-$config[b] = array(
-        'host' => "192.168.2.224",
-        'port' => "11212",
-);
-$config[c] = array(
+$config['1'] = array(
         'host' => "192.168.2.224",
         'port' => "11213",
 );
-$config[d] = array(
+$config['2'] = array(
         'host' => "192.168.2.224",
         'port' => "11214",
+);
+$config['3'] = array(
+        'host' => "192.168.2.224",
+        'port' => "11215",
 );
 return $config;
 
