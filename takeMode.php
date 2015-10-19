@@ -11,6 +11,10 @@ class takeMode {
 	//初始化
 	public function __construct($config) {
 		$this->_config = $config;
+		
+		foreach ($this->_config as $k => $v) {
+		    $this->_node[] = $k; 
+		}
 	}
 	
 	//生成一个key
@@ -25,6 +29,6 @@ class takeMode {
 		}
 		//取模，求余
 		$server = $this->getKey($name)%count($this->_config);
-		return $server;
+		return $this->_node[$server];
 	}
 }
