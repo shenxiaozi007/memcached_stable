@@ -6,12 +6,12 @@ error_reporting(-1);                    //打印出所有的 错误信息
 
 include_once("config.php");
 include_once("takeMode.php");
-include_once("cache.php");
+include_once("memcacheClass.php");
 include_once("hashMode.php");
 
-$takeObj = new hashMode($config);//takeMode
+$takeObj = new takeMode($config);//takeMode
 //实例化memcached
-$memcached = new cache("fuck");
+$memcached = new memcacheClass()
 
 //循环插入 1万条
 for($i = 0; $i<10000;$i++) {
@@ -25,9 +25,10 @@ for($i = 0; $i<10000;$i++) {
     
     //链接
     $obj = $memcached->connect($takeObj->_config[$serverNum]['host'],$takeObj->_config[$serverNum]['port']);
+	
     //保存
-    $set = $memcached->addByKey($serverNum, $key, $value);
-    var_dump($set,$serverNum,$key,$value);
+    $set = $memcached->add($key, $value);
+    
     /* var_dump($obj); */
     usleep(3000);
 }
