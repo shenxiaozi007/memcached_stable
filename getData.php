@@ -5,8 +5,8 @@ include_once("config.php");
 include_once("takeMode.php");
 include_once("cache.php");
 include_once("hashMode.php");
-$takeObj = new takeMode($config);
-$memcached = new cache();
+$takeObj = new hashMode($config);
+$memcached = new cache("fuck");
 //循环获取数据
 $key = 'huangxingchun';
 $i = $_GET['num'];
@@ -21,12 +21,13 @@ $setKet = $takeObj->getKey($data);
 //链接
 $obj = $memcached->connect($takeObj->_config[$serverNum]['host'],$takeObj->_config[$serverNum]['port']);
 //获取值
-$value = $memcached->get($setKet);
+$value = $memcached->get($serverNum, $setKet);
+$bykey = $memcached->getServerBykey($setKet);
 if(!$value) {
     //为空保存value
-    //$memcached->add($key, $data);
+    //$memcached->add($serverNum,$key, $data);
 }
 //获取缓存率
 $rs = $memcached->calculate($takeObj->_config[$serverNum]['host'],$takeObj->_config[$serverNum]['port']);
 usleep(3000);
-echo json_encode(array('calculate'=>$rs,'num'=>$i,'value'=>$value,'rs'=>$data,'server'=>$serverNum,'key'=>$setKet));
+echo json_encode(array('calculate'=>$rs,'num'=>$i,'value'=>$value,'rs'=>$data,'server'=>$serverNum,'key'=>$setKet,'trueServer'=>$bykey['port']));

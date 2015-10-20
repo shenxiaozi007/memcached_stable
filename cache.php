@@ -4,8 +4,8 @@ class cache {
     private $serviceList = array();
     private $service ;
 
-    public function __construct() {
-        $this->service = new Memcached();
+    public function __construct($str) {
+        $this->service = new Memcached($str);
        
     }
     
@@ -15,7 +15,7 @@ class cache {
         if(is_array($this->serviceList)) {
             foreach ($this->serviceList as $v) {
                 if($v['host'] == $host && $v['port'] == $port) {
-                    var_dump($this->serviceList);
+                    //var_dump($this->serviceList);
                     return true;
                     
                 }
@@ -44,12 +44,20 @@ class cache {
         $statusList = $this->service->getStats();
         $status = $statusList[$host.':'.$port];
         if(!$status['cmd_get']) {
-            return 0;
+            return 1;
         }
-        return $status['get_misses']/$status['cmd_get'];
+        return $status['get_hits']/$status['cmd_get'];
     }
-    public function get($key) {
-        $value = $this->service->get($key);
+    public function get($service,$key) {
+        $value = $this->service->getByKey($service, $key);
+        
         return $value;
     }
-}
+    public function addByKey($server,$data,$value) {
+        $this->service->addByKey($server,$data,$value);
+    }
+    public function getServerBykey($key) {
+        $array = $this->service->getServerByKey($key);
+        return $array;
+    } 
+}                                                                             

@@ -40,9 +40,8 @@ $(function () {
                                 success: function(data,status){//如果调用php成功    
                                 	var x = (new Date()).getTime(), // current time
                                     y = data.calculate;
-                                alert(data.value);
                                 	i = i+1;
-                                	if(i > 1000) {
+                                	if(i > 10000) {
                                 		i = 0;
                                 	}
                                     series.addPoint([x, y], true, true);
@@ -51,7 +50,7 @@ $(function () {
                             
                        
                         
-                        }, 1000);
+                        }, 600);
                     }
                 }
             },

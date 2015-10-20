@@ -9,12 +9,12 @@ include_once("takeMode.php");
 include_once("cache.php");
 include_once("hashMode.php");
 
-$takeObj = new takeMode($config);//takeMode
+$takeObj = new hashMode($config);//takeMode
 //实例化memcached
-$memcached = new cache();
+$memcached = new cache("fuck");
 
 //循环插入 1万条
-for($i = 0; $i<1000;$i++) {
+for($i = 0; $i<10000;$i++) {
     //数据
     $value = 'huangxingchun'.$i;
     
@@ -26,7 +26,7 @@ for($i = 0; $i<1000;$i++) {
     //链接
     $obj = $memcached->connect($takeObj->_config[$serverNum]['host'],$takeObj->_config[$serverNum]['port']);
     //保存
-    $set = $memcached->add($key, $value);
+    $set = $memcached->addByKey($serverNum, $key, $value);
     var_dump($set,$serverNum,$key,$value);
     /* var_dump($obj); */
     usleep(3000);

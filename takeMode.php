@@ -31,4 +31,8 @@ class takeMode {
 		$server = $this->getKey($name)%count($this->_config);
 		return $this->_node[$server];
 	}
+
+	public function delServer($str) {
+	    //删除
+	}
 }
