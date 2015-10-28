@@ -34,5 +34,7 @@ class takeMode {
 
 	public function delServer($str) {
 	    //删除
+	    unset($this->_config[$str]);
+	    
 	}
 }

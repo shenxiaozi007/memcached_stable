@@ -11,8 +11,8 @@ class memcacheClass extends memAbstract {
     }
     
     public function connect($host, $post) {
-	$this->service->addServer($host, $post); 
-	$this->service->pconnect($host, $post);
+	   //$this->service->addServer($host, $post); 
+	   $this->service->pconnect($host, $post);
 	return true;
     }
     /**
@@ -39,5 +39,8 @@ class memcacheClass extends memAbstract {
         $value = $this->service->get($key);
         
         return $value;
+    }
+    public function close(){
+        $this->service->close();
     }
 }                                                                             
