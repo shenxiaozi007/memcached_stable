@@ -7,7 +7,9 @@ abstract class memAbstract {
         //获取值
         abstract function get($key);
         //计算命中率
+		//第一天
         abstract function calculate();
+		
 
 }
 
